@@ -1,0 +1,141 @@
+﻿<UserControl x:Class="DesktopClientGui.Course.AddCoursePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:courseViewModel1="clr-namespace:DesktopClientLogic.ViewModels.CourseViewModel;assembly=DesktopClientLogic"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <courseViewModel1:AddCourseViewModel />
+    </UserControl.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding OnPageLoadCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../DarkStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <mui:BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Style="{StaticResource ContentRoot}">
+        <ScrollViewer>
+            <StackPanel MinWidth="200">
+                <TextBlock Text="Dodaj kurs" Style="{DynamicResource Heading2}" Margin="0,0,0,8"
+                           Visibility="{Binding IsAdding, Converter={StaticResource BoolToVis}}" />
+                <mui:BBCodeBlock BBCode="Podaj wszystkie wymagane dane." Margin="0,0,0,16"
+                                 Visibility="{Binding IsAdding, Converter={StaticResource BoolToVis}}" />
+                <TextBlock Text="Edytuj kurs" Style="{DynamicResource Heading2}" Margin="0,0,0,8"
+                           Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}" />
+                <StackPanel x:Name="Form" Orientation="Vertical">
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="Margin" Value="0,0,0,4" />
+                        </Style>
+                        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                            <Setter Property="Width" Value="150" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <StackPanel>
+                        <Label>Typ kursu</Label>
+                        <ComboBox ItemsSource="{Binding CourseTypes}" SelectedItem="{Binding SelectedCourse}"
+                                  Width="200" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label>Instruktor</Label>
+                        <ComboBox ItemsSource="{Binding Instructors}" SelectedItem="{Binding SelectedInstructor}"
+                                  Width="200" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,30,0,0">
+                        <Label HorizontalAlignment="Left">Daty kursu:</Label>
+                        <DataGrid ItemsSource="{Binding Course.Dates}" AutoGenerateColumns="False" IsReadOnly="True"
+                                  CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserResizeRows="true"
+                                  CanUserSortColumns="true" Style="{DynamicResource InnnerTable}"
+                                  HeadersVisibility="None"
+                                  Width="300">
+                            <DataGrid.Columns>
+                                <mui:DataGridTextColumn Header="" Binding="{Binding Date}" Width="*" />
+
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Command="{Binding DataContext.RemoveDateCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                                CommandParameter="{Binding}"
+                                                Height="20" Width="20" Padding="0" Margin="0" Background="Transparent"
+                                                BorderThickness="0">
+                                                <StackPanel>
+                                                    <Image Source="{StaticResource DeleteImage}" />
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker
+                                SelectedDate="{Binding DataContext.DateToAdd, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}"
+                                Width="200" />
+                            <Button Command="{Binding AddDateCommand}" Width="200" Margin="20,0,0,0">Dodaj datę</Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="0,30,0,0"
+                                Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"
+                                Orientation="Vertical" HorizontalAlignment="Left">
+                        <Label HorizontalAlignment="Left">Uczestnicy kursu:</Label>
+                        <DataGrid ItemsSource="{Binding Course.Customers}" AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  CanUserReorderColumns="True" CanUserResizeColumns="True" CanUserResizeRows="true"
+                                  CanUserSortColumns="true" Style="{DynamicResource InnnerTable}"
+                                  HeadersVisibility="None"
+                                  Width="300">
+                            <DataGrid.Columns>
+                                <mui:DataGridTextColumn Header="Imie" Binding="{Binding Name}" Width="*" />
+                                <mui:DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" Width="*" />
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                Command="{Binding DataContext.RemoveCustomerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                                CommandParameter="{Binding Id}"
+                                                Height="20" Width="20" Padding="0" Margin="0" Background="Transparent"
+                                                BorderThickness="0">
+                                                <StackPanel>
+                                                    <Image Source="{StaticResource DeleteImage}" />
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                    <Button Command="{Binding AddCourseCommand}"
+                            Width="200" Margin="0,50,0,0" HorizontalAlignment="Left"
+                            Visibility="{Binding IsAdding, Converter={StaticResource BoolToVis}}">
+                        Dodaj kurs
+                    </Button>
+                    <Button Command="{Binding SaveChangesCommand}"
+                            Width="200" Margin="0,50,0,0" HorizontalAlignment="Left"
+                            Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}">
+                        Zapisz zmiany
+                    </Button>
+                    <Button Command="{Binding RemoveCourseCommand}"
+                            Width="200" Margin="0,50,0,0" HorizontalAlignment="Right"
+                            Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}">
+                        Usuń kurs
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

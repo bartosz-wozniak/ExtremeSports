@@ -1,0 +1,37 @@
+﻿@using WebClient.Models
+@model OfferedCoursesViewModel
+@{
+    ViewBag.Title = "MyServices";
+}
+<link rel="stylesheet" href="../../TableCss.css" type="text/css" />
+
+<h2>Oferowane kursy:</h2>
+<div class="CSSTableGenerator">
+    <table> 
+        <tr>
+            <td>Numer</td>
+            <td>Sport</td>
+            <td>Nazwa</td>
+            <td>Instruktor</td>
+            <td>Daty</td>
+        </tr>
+        @foreach (var c in Model.Courses)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.SportName</td>
+                <td>@c.ServiceTypeName</td>
+                <td>@c.InstructorFullName</td>
+                <td>
+                    <table>
+                        @foreach (var d in c.Dates)
+                        {
+                            <tr><th>@d</th></tr>
+                        }
+                    </table>
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

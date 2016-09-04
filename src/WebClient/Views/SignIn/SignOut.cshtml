@@ -1,0 +1,54 @@
+﻿@using WebClient.Models
+@model SignInViewModel
+@{
+    ViewBag.Title = "Logowanie";
+}
+
+@if (Request.IsAuthenticated == false)
+{
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+    using (Html.BeginForm("SignIn", "SignIn", FormMethod.Post))
+    {
+        <section class="form-field">
+            <table>
+                <tr>
+                    <td>
+                        <label for="email">E-Mail: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Hasło: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Zaloguj się" class="submit btn blue-btn special-submit" />
+                    </td>
+                </tr>
+            </table>
+        </section>
+        if (Model != null)
+        {
+            <div>@Model.ErrorText   </div>
+        }
+    }
+}
+else
+{
+    <div>Jesteś zalogowany.</div>
+}
+
+
+
+
+
+
+

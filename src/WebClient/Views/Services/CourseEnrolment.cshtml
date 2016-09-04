@@ -1,0 +1,56 @@
+﻿@using WebClient.Models
+@model CourseEnrolmentViewModel
+@{
+    ViewBag.Title = "CourseEnrolment";
+}
+<link rel="stylesheet" href="../../TableCss.css" type="text/css" />
+@if (Request.IsAuthenticated)
+{
+    <h2>Wybierz kurs:</h2>
+    <div class="CSSTableGenerator">
+        <table>
+            <tr>
+                <td>Numer</td>
+                <td>Sport</td>
+                <td>Nazwa</td>
+                <td>Dostepne miejsca</td>
+                <td>Instruktor</td>
+                <td>Daty</td>
+                <td></td>
+            </tr>
+            @foreach (var c in Model.Courses)
+            {
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.SportName</td>
+                    <td>@c.ServiceTypeName</td>
+                    <td>@c.AvailibleVacancies / @c.MaxVacancies</td>
+                    <td>@c.InstructorFullName</td>
+                    <td>
+                        <table>
+                            @foreach (var d in c.Dates)
+                            {
+                                <tr><th>@d</th></tr>
+                            }
+                        </table>
+                    </td>
+                    <td>
+                        @if (c.AvailibleVacancies > 0)
+                        {
+                            @Html.ActionLink("Zapisz się na kurs", "EnrolCourse", "Services", new {id = @c.Id}, null)
+                        }
+                        else
+                        {
+                            <p>Brak miejsc</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+}
+else
+{
+    <p>Zaloguj się!</p>
+}

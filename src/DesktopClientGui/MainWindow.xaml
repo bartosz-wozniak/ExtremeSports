@@ -1,0 +1,61 @@
+﻿<mui:ModernWindow x:Class="DesktopClientGui.MainWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                  Title="Extreme Sport Company" IsTitleVisible="True"
+                  ContentSource="/Home.xaml"
+                  WindowStartupLocation="CenterScreen" Width="800" Height="600" MinWidth="600">
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Zapisz">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Zapisz na kurs" Source="/Enrolment/EnrolmentCourse.xaml" />
+                <mui:Link DisplayName="Zapisz na usługę jednorazową" Source="/Enrolment/EnrolmentSingleService.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Kursy">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Przeglądaj" Source="/Course/CourseHomePage.xaml" />
+                <mui:Link DisplayName="Dodaj kurs" Source="/Course/AddCoursePage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Usługi jednorazowe">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Przeglądaj" Source="/SingleService/SingleServiceHome.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Klienci">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Przeglądaj" Source="/Customer/CustomerHomePage.xaml" />
+                <mui:Link DisplayName="Twórz" Source="/Customer/CustomerFormPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Pracownicy">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Przeglądaj" Source="/Employee/EmployeeHomePage.xaml" />
+                <mui:Link DisplayName="Twórz" Source="/Employee/EmployeeFormPage.xaml" />
+                <mui:Link DisplayName="Przeglądaj stanowiska" Source="/Position/positionHomePage.xaml" />
+                <mui:Link DisplayName="Twórz stanowiska" Source="/Position/positionFormPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Sporty">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Przeglądaj" Source="/SportType/SportTypeHomePage.xaml" />
+                <mui:Link DisplayName="Twórz" Source="/SportType/SportTypeFormPage.xaml" />
+                <mui:Link DisplayName="Dodaj nową usługę" Source="/SportType/AddServiceTypePage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Logowanie">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Zaloguj" Source="/SignIn/SignInPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="Ustawienia" GroupKey="settings">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Aplikacja" Source="/Settings/SettingsPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="Ustawienia" Source="/Settings/SettingsPage.xaml" />
+    </mui:ModernWindow.TitleLinks>
+</mui:ModernWindow>

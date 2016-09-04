@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="DesktopClientGui.Enrolment.EnrolmentCourse"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:enrolmentViewModel="clr-namespace:DesktopClientLogic.ViewModels.EnrolmentViewModel;assembly=DesktopClientLogic"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <enrolmentViewModel:EnrolmentCourseViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../DarkStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding OnPageLoadCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <StackPanel>
+                <StackPanel Margin="0,0,0,20">
+                    <CheckBox Width="200" IsChecked="{Binding PaymentDone}" HorizontalAlignment="Left">Zapłacono</CheckBox>
+                    <Label Content="{Binding SelectedCustomer}" Margin="20,10,0,0" HorizontalAlignment="Right" />
+                    <Label Content="{Binding SelectedServiceType}" Margin="20,10,0,0" HorizontalAlignment="Right" />
+                </StackPanel>
+                <StackPanel Margin="0,0,0,50" Visibility="{Binding SelectCustomerVisibility}">
+                    <TextBlock Style="{DynamicResource Heading2}" Margin="0,0,0,10">Wybierz klienta</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">Szukaj</Label>
+                        <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+                    </StackPanel>
+                    <DataGrid ItemsSource="{Binding Customers}" HorizontalAlignment="Left"
+                              AutoGenerateColumns="False" IsReadOnly="True" Margin="30,30,0,0"
+                              SelectedItem="{Binding SelectedCustomer}" SelectionMode="Single"
+                              Width="400">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Header="Imie" Binding="{Binding Name}" />
+                            <mui:DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,50" Visibility="{Binding SelectCourseTypeVisibility}">
+                    <TextBlock Style="{DynamicResource Heading2}">Wybierz typ kursu</TextBlock>
+                    <DataGrid ItemsSource="{Binding ServiceTypes}" Margin="10,30,0,0"
+                              AutoGenerateColumns="False" IsReadOnly="True" RowHeight="60"
+                              SelectedItem="{Binding SelectedServiceType}" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Header="Sport" Binding="{Binding SportTypeName}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </mui:DataGridTextColumn>
+                            <mui:DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="150">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </mui:DataGridTextColumn>
+                            <mui:DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="200">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </mui:DataGridTextColumn>
+                            <mui:DataGridTextColumn Header="Cena" Binding="{Binding Price}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </mui:DataGridTextColumn>
+                            <mui:DataGridTextColumn Header="Czas trwania lekcji" Binding="{Binding DurationInMinutes}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style>
+                                        <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                        <Setter Property="TextBlock.VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </mui:DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,50" Visibility="{Binding SelectCourseVisibility}">
+                    <TextBlock Style="{DynamicResource Heading2}">Wybierz kurs</TextBlock>
+                    <DataGrid ItemsSource="{Binding Courses}" AutoGenerateColumns="False"
+                              IsReadOnly="True" CanUserReorderColumns="True" CanUserResizeColumns="True"
+                              CanUserResizeRows="true" CanUserSortColumns="true"
+                              SelectionMode="Single" SelectedItem="{Binding SelectedCourse}"
+                              Margin="15,30,0,0">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </mui:DataGridTextColumn>
+                            <mui:DataGridTextColumn Header="Instruktor" Binding="{Binding InstructorFullName}"
+                                                    Width="3*">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </mui:DataGridTextColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="16" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="16" />
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                            Background="{Binding DataContext.AccentColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+                                    <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                                            Background="{Binding DataContext.AccentColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+                                    <StackPanel Width="300" Grid.Column="0" Grid.Row="0">
+                                        <mui:BBCodeBlock BBCode="Daty kursu:" />
+                                        <DataGrid ItemsSource="{Binding Dates}" AutoGenerateColumns="False"
+                                                  IsReadOnly="True"
+                                                  CanUserReorderColumns="True" CanUserResizeColumns="True"
+                                                  CanUserResizeRows="true"
+                                                  CanUserSortColumns="true" Style="{DynamicResource InnnerTable}"
+                                                  HeadersVisibility="None">
+                                            <DataGrid.Columns>
+                                                <mui:DataGridTextColumn Header="" Binding="{Binding Date}" Width="*" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button
+                Width="100" VerticalAlignment="Bottom" Margin="20,0,0,0"
+                Command="{Binding PrevCommand}">
+                Cofnij
+            </Button>
+            <Button
+                Width="100" VerticalAlignment="Bottom" Visibility="{Binding SelectCourseVisibility}" Margin="20,0,0,0"
+                Command="{Binding EnrolCommand}">
+                Zapisz
+            </Button>
+            <Button
+                Width="100" VerticalAlignment="Bottom" Visibility="{Binding NextVisibility}" Margin="20,0,0,0"
+                Command="{Binding NextCommand}">
+                Dalej
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52D5FCC6-2EAE-44CB-A2C9-FBC4ED7FF1CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DesktopClientLogic</RootNamespace>
+    <AssemblyName>DesktopClientLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirstFloor.ModernUI">
+      <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\CustomerConverter.cs" />
+    <Compile Include="Converters\EmployeeConverter.cs" />
+    <Compile Include="Converters\PositionConverter.cs" />
+    <Compile Include="Converters\ServiceConverter.cs" />
+    <Compile Include="Converters\ServiceTypeConverter.cs" />
+    <Compile Include="Converters\SportTypeConverter.cs" />
+    <Compile Include="Proxy\AuthenticationProxy.cs" />
+    <Compile Include="Proxy\EmployeeProxy.cs" />
+    <Compile Include="Proxy\CustomerProxy.cs" />
+    <Compile Include="Proxy\ServicesProxy.cs" />
+    <Compile Include="Proxy\ServiceTypeProxy.cs" />
+    <Compile Include="Proxy\SingleServiceProxy.cs" />
+    <Compile Include="Proxy\PositionProxy.cs" />
+    <Compile Include="Proxy\SportTypeProxy.cs" />
+    <Compile Include="Proxy\WebApiProxy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelObjects\Course.cs" />
+    <Compile Include="ViewModelObjects\Customer.cs" />
+    <Compile Include="ViewModelObjects\SignIn.cs" />
+    <Compile Include="ViewModelObjects\Employee.cs" />
+    <Compile Include="ViewModelObjects\Position.cs" />
+    <Compile Include="ViewModelObjects\Service.cs" />
+    <Compile Include="ViewModelObjects\ServiceType.cs" />
+    <Compile Include="ViewModelObjects\SingleService.cs" />
+    <Compile Include="ViewModelObjects\SportType.cs" />
+    <Compile Include="ViewModels\AppearanceViewModel.cs" />
+    <Compile Include="ViewModels\CourseViewModel\AddCourseViewModel.cs" />
+    <Compile Include="ViewModels\CourseViewModel\CourseHomeViewModel.cs" />
+    <Compile Include="ViewModels\CustomerViewModel\CustomerFormViewModel.cs" />
+    <Compile Include="ViewModels\CustomerViewModel\CustomerHomeViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel\EmployeeFormViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel\EmployeeHomeViewModel.cs" />
+    <Compile Include="ViewModels\EnrolmentViewModel\EnrolmentCourseViewModel.cs" />
+    <Compile Include="ViewModels\EnrolmentViewModel\EnrolmentSingleServiceViewModel.cs" />
+    <Compile Include="ViewModels\EnrolmentViewModel\SelectStage.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\PositionViewModel\PositionFormViewModel.cs" />
+    <Compile Include="ViewModels\PositionViewModel\PositionHomeViewModel.cs" />
+    <Compile Include="ViewModels\SignInViewModel\PasswordHelper.cs" />
+    <Compile Include="ViewModels\SignInViewModel\SignInViewModel.cs" />
+    <Compile Include="ViewModels\SingleServiceViewModel\SingleServiceHomeViewModel.cs" />
+    <Compile Include="ViewModels\SportTypeViewModel\AddServiceTypeViewModel.cs" />
+    <Compile Include="ViewModels\SportTypeViewModel\SportTypeFormViewModel.cs" />
+    <Compile Include="ViewModels\SportTypeViewModel\SportTypeHomeViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{2D927C41-C93D-4E9C-83D2-44443646F3E2}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi\WebApi.csproj">
+      <Project>{9f23273c-7e74-4ca6-a9fd-b435d2c1fb12}</Project>
+      <Name>WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

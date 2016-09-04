@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="DesktopClientGui.Enrolment.EnrolmentSingleService"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:enrolmentViewModel="clr-namespace:DesktopClientLogic.ViewModels.EnrolmentViewModel;assembly=DesktopClientLogic"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <enrolmentViewModel:EnrolmentSingleServiceViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../DarkStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding OnPageLoadCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <StackPanel>
+                <StackPanel Margin="0,0,0,20">
+                    <CheckBox Width="200" IsChecked="{Binding PaymentDone}" HorizontalAlignment="Left">Zapłacono</CheckBox>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,50">
+                    <TextBlock Style="{DynamicResource Heading2}" Margin="0,0,0,10">Klient</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Width="80">Szukaj</Label>
+                        <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+                    </StackPanel>
+                    <DataGrid ItemsSource="{Binding Customers}" HorizontalAlignment="Left"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectedItem="{Binding SelectedCustomer}" SelectionMode="Single"
+                              Width="400">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Header="Imie" Binding="{Binding Name}" />
+                            <mui:DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,50">
+                    <TextBlock Style="{DynamicResource Heading2}" Margin="0,0,0,10" HorizontalAlignment="Left">Data</TextBlock>
+                    <DatePicker SelectedDate="{Binding Date}" Width="200" HorizontalAlignment="Left" />
+                </StackPanel>
+                <StackPanel Margin="0,0,0,50">
+                    <TextBlock Style="{DynamicResource Heading2}">Typ usługi</TextBlock>
+                    <DataGrid ItemsSource="{Binding ServiceTypes}"
+                              AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectedItem="{Binding SelectedServiceType}" SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <mui:DataGridTextColumn Header="Sport" Binding="{Binding SportTypeName}" />
+                            <mui:DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" />
+                            <mui:DataGridTextColumn Header="Opis" Binding="{Binding Description}" Width="100" />
+                            <mui:DataGridTextColumn Header="Cena" Binding="{Binding Price}" />
+                            <mui:DataGridTextColumn Header="Czas trwania lekcji" Binding="{Binding DurationInMinutes}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,50">
+                    <TextBlock Style="{DynamicResource Heading2}" Margin="0,0,0,10">Instruktor</TextBlock>
+                    <ComboBox ItemsSource="{Binding Instructors}"
+                              HorizontalAlignment="Left"
+                              SelectedItem="{Binding SelectedInstructor}" Width="200" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <Button
+            HorizontalAlignment="Center" Width="200" Grid.Row="1" VerticalAlignment="Bottom"
+            Command="{Binding EnrolCommand}">
+            Zapisz
+        </Button>
+    </Grid>
+</UserControl>

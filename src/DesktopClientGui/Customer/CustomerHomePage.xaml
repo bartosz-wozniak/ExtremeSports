@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="DesktopClientGui.Customer.CustomerHomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:customerViewModel="clr-namespace:DesktopClientLogic.ViewModels.CustomerViewModel;assembly=DesktopClientLogic">
+    <UserControl.DataContext>
+        <customerViewModel:CustomerHomeViewModel />
+    </UserControl.DataContext>
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="Loaded">
+            <intr:InvokeCommandAction Command="{Binding OnPageLoadCommand}" />
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
+    <Grid Style="{StaticResource ContentRoot}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Text="Przeglądaj Klientów" Style="{DynamicResource Heading2}"
+                       Margin="0,0,0,8" />
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Label Width="200">Szukaj (imię, nazwisko, pesel)</Label>
+                <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+            </StackPanel>
+            <TextBlock DockPanel.Dock="Top" Height="Auto" Text="{Binding ErrorText, Mode=TwoWay}" Foreground="Red"
+                       Margin="0,0,0,8">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <DataGrid SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True" CanUserReorderColumns="True" CanUserResizeColumns="True"
+                      CanUserResizeRows="true" CanUserSortColumns="true">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Command="{Binding DataContext.EditCustomerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                    Height="20" Width="20" Padding="0" Margin="0" Background="Transparent"
+                                    BorderThickness="0">
+                                    <StackPanel>
+                                        <Image Source="..\Image\record.edit.dark.png" Height="18" Width="18" Margin="0" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Command="{Binding DataContext.RemoveCustomerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                    Height="20" Width="20" Padding="0" Margin="0" Background="Transparent"
+                                    BorderThickness="0">
+                                    <StackPanel>
+                                        <Image Source="..\Image\record.delete.dark.png" Height="18" Width="18"
+                                               Margin="0" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <mui:DataGridTextColumn Header="ID" Binding="{Binding Id}" Visibility="Hidden" />
+                    <mui:DataGridTextColumn Header="Imię" Binding="{Binding Name}" />
+                    <mui:DataGridTextColumn Header="Nazwisko" Binding="{Binding Surname}" />
+                    <mui:DataGridTextColumn Header="E-Mail" Binding="{Binding Email}" />
+                    <mui:DataGridTextColumn Header="Telefon" Binding="{Binding PhoneNumber}" />
+                    <mui:DataGridTextColumn Header="Pesel" Binding="{Binding PersonalIdentityNumber}" />
+                    <mui:DataGridTextColumn Header="Numer&#x0a;Dowodu" Binding="{Binding IdentityCardNumber}" />
+                    <mui:DataGridTextColumn Header="Miasto" Binding="{Binding City}" />
+                    <mui:DataGridTextColumn Header="Ulica" Binding="{Binding Street}" />
+                    <mui:DataGridTextColumn Header="Kod&#x0a;pocztowy" Binding="{Binding PostalCode}" />
+                    <mui:DataGridTextColumn Header="Numer&#x0a;domu" Binding="{Binding HouseNumber}" />
+                    <mui:DataGridTextColumn Header="Numer&#x0a;mieszkania" Binding="{Binding ApartmentNumber}" />
+                    <mui:DataGridTextColumn Header="Telefon&#x0a;ICE" Binding="{Binding IcePhoneNumber}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</UserControl>

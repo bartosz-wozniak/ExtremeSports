@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="31864ea76dd24dcebe68681686cd3efd" Name="Diagram1">
+        <EntityTypeShape EntityType="DataAccess.Customer" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataAccess.Employee" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataAccess.Position" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataAccess.Service" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataAccess.ServiceDate" Width="1.5" PointX="12" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataAccess.ServiceType" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataAccess.SportType" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="DataAccess.FK__Employee__positi__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="DataAccess.FK__Employee__superv__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="DataAccess.FK__Service__employe__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="DataAccess.FK__Service__service__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="DataAccess.FK__ServiceDa__servi__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="DataAccess.FK__ServiceTy__sport__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="DataAccess.EmployeeToSportType" ManuallyRouted="false" />
+        <AssociationConnector Association="DataAccess.ServiceToCustomer" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

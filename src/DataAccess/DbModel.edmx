@@ -1,0 +1,675 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DataAccess.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="icePhoneNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="personalIdentityNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="identityCardNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="street" Type="nvarchar" MaxLength="100" />
+          <Property Name="postalCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="houseNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="phoneNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="icePhoneNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="personalIdentityNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="identityCardNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="postalCode" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="houseNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="apartmentNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="positionID" Type="int" Nullable="false" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="supervisorID" Type="int" />
+          <Property Name="password" Type="nvarchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeToSportType">
+          <Key>
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="sportTypeID" />
+          </Key>
+          <Property Name="employeeID" Type="int" Nullable="false" />
+          <Property Name="sportTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="serviceTypeID" Type="int" Nullable="false" />
+          <Property Name="employeeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceDate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="smalldatetime" Nullable="false" />
+          <Property Name="serviceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceToCustomer">
+          <Key>
+            <PropertyRef Name="customerID" />
+            <PropertyRef Name="serviceID" />
+          </Key>
+          <Property Name="customerID" Type="int" Nullable="false" />
+          <Property Name="serviceID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sportTypeID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="durationInMinutes" Type="int" Nullable="false" />
+          <Property Name="price" Type="smallmoney" Nullable="false" />
+          <Property Name="isCourse" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SportType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="ntext" />
+        </EntityType>
+        <Association Name="FK__Employee__positi__1CF15040">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="positionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__superv__1DE57479">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="supervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeT__emplo__20C1E124">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeToSportType" Type="Self.EmployeeToSportType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EmployeeToSportType">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeT__sport__21B6055D">
+          <End Role="SportType" Type="Self.SportType" Multiplicity="1" />
+          <End Role="EmployeeToSportType" Type="Self.EmployeeToSportType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SportType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="EmployeeToSportType">
+              <PropertyRef Name="sportTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Service__employe__29572725">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Service__service__286302EC">
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="serviceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceDa__servi__300424B4">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceDate" Type="Self.ServiceDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceDate">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceTo__custo__2C3393D0">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="ServiceToCustomer" Type="Self.ServiceToCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceToCustomer">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceTo__servi__2D27B809">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceToCustomer" Type="Self.ServiceToCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceToCustomer">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceTy__sport__25869641">
+          <End Role="SportType" Type="Self.SportType" Multiplicity="1" />
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SportType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceType">
+              <PropertyRef Name="sportTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataAccessStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeToSportType" EntityType="Self.EmployeeToSportType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceDate" EntityType="Self.ServiceDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceToCustomer" EntityType="Self.ServiceToCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceType" EntityType="Self.ServiceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SportType" EntityType="Self.SportType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employee__positi__1CF15040" Association="Self.FK__Employee__positi__1CF15040">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__superv__1DE57479" Association="Self.FK__Employee__superv__1DE57479">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeT__emplo__20C1E124" Association="Self.FK__EmployeeT__emplo__20C1E124">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeToSportType" EntitySet="EmployeeToSportType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeT__sport__21B6055D" Association="Self.FK__EmployeeT__sport__21B6055D">
+            <End Role="SportType" EntitySet="SportType" />
+            <End Role="EmployeeToSportType" EntitySet="EmployeeToSportType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Service__employe__29572725" Association="Self.FK__Service__employe__29572725">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Service__service__286302EC" Association="Self.FK__Service__service__286302EC">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceDa__servi__300424B4" Association="Self.FK__ServiceDa__servi__300424B4">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceDate" EntitySet="ServiceDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceTo__custo__2C3393D0" Association="Self.FK__ServiceTo__custo__2C3393D0">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="ServiceToCustomer" EntitySet="ServiceToCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceTo__servi__2D27B809" Association="Self.FK__ServiceTo__servi__2D27B809">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceToCustomer" EntitySet="ServiceToCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceTy__sport__25869641" Association="Self.FK__ServiceTy__sport__25869641">
+            <End Role="SportType" EntitySet="SportType" />
+            <End Role="ServiceType" EntitySet="ServiceType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataAccess" Alias="Self" annotation:UseStrongSpatialTypes="false"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="icePhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="personalIdentityNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <Property Name="identityCardNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="postalCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="houseNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.ServiceToCustomer" FromRole="Customer" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <Property Name="icePhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="personalIdentityNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <Property Name="identityCardNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postalCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="houseNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <Property Name="apartmentNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true"
+                    Nullable="false" />
+          <Property Name="positionID" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="supervisorID" Type="Int32" />
+          <Property Name="password" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Position" Relationship="Self.FK__Employee__positi__1CF15040" FromRole="Employee"
+                              ToRole="Position" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK__Employee__superv__1DE57479" FromRole="Employee"
+                              ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="Self.FK__Employee__superv__1DE57479" FromRole="Employee1"
+                              ToRole="Employee" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__Service__employe__29572725" FromRole="Employee"
+                              ToRole="Service" />
+          <NavigationProperty Name="SportType" Relationship="Self.EmployeeToSportType" FromRole="Employee"
+                              ToRole="SportType" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__positi__1CF15040" FromRole="Position"
+                              ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="serviceTypeID" Type="Int32" Nullable="false" />
+          <Property Name="employeeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Service__employe__29572725" FromRole="Service"
+                              ToRole="Employee" />
+          <NavigationProperty Name="ServiceType" Relationship="Self.FK__Service__service__286302EC" FromRole="Service"
+                              ToRole="ServiceType" />
+          <NavigationProperty Name="ServiceDate" Relationship="Self.FK__ServiceDa__servi__300424B4" FromRole="Service"
+                              ToRole="ServiceDate" />
+          <NavigationProperty Name="Customer" Relationship="Self.ServiceToCustomer" FromRole="Service"
+                              ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="ServiceDate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="serviceID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__ServiceDa__servi__300424B4" FromRole="ServiceDate"
+                              ToRole="Service" />
+        </EntityType>
+        <EntityType Name="ServiceType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sportTypeID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="durationInMinutes" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="isCourse" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__Service__service__286302EC" FromRole="ServiceType"
+                              ToRole="Service" />
+          <NavigationProperty Name="SportType" Relationship="Self.FK__ServiceTy__sport__25869641"
+                              FromRole="ServiceType" ToRole="SportType" />
+        </EntityType>
+        <EntityType Name="SportType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ServiceType" Relationship="Self.FK__ServiceTy__sport__25869641"
+                              FromRole="SportType" ToRole="ServiceType" />
+          <NavigationProperty Name="Employee" Relationship="Self.EmployeeToSportType" FromRole="SportType"
+                              ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__Employee__positi__1CF15040">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="positionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__superv__1DE57479">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="supervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Service__employe__29572725">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Service__service__286302EC">
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="serviceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceDa__servi__300424B4">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceDate" Type="Self.ServiceDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceDate">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceTy__sport__25869641">
+          <End Role="SportType" Type="Self.SportType" Multiplicity="1" />
+          <End Role="ServiceType" Type="Self.ServiceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SportType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ServiceType">
+              <PropertyRef Name="sportTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeToSportType">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <End Role="SportType" Type="Self.SportType" Multiplicity="*" />
+        </Association>
+        <Association Name="ServiceToCustomer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ExtremeSportDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="ServiceDate" EntityType="Self.ServiceDate" />
+          <EntitySet Name="ServiceType" EntityType="Self.ServiceType" />
+          <EntitySet Name="SportType" EntityType="Self.SportType" />
+          <AssociationSet Name="FK__Employee__positi__1CF15040" Association="Self.FK__Employee__positi__1CF15040">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__superv__1DE57479" Association="Self.FK__Employee__superv__1DE57479">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Service__employe__29572725" Association="Self.FK__Service__employe__29572725">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Service__service__286302EC" Association="Self.FK__Service__service__286302EC">
+            <End Role="ServiceType" EntitySet="ServiceType" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceDa__servi__300424B4" Association="Self.FK__ServiceDa__servi__300424B4">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceDate" EntitySet="ServiceDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceTy__sport__25869641" Association="Self.FK__ServiceTy__sport__25869641">
+            <End Role="SportType" EntitySet="SportType" />
+            <End Role="ServiceType" EntitySet="ServiceType" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeToSportType" Association="Self.EmployeeToSportType">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SportType" EntitySet="SportType" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceToCustomer" Association="Self.ServiceToCustomer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataAccessStoreContainer"
+                                CdmEntityContainer="ExtremeSportDBEntities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="DataAccess.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="icePhoneNumber" ColumnName="icePhoneNumber" />
+                <ScalarProperty Name="personalIdentityNumber" ColumnName="personalIdentityNumber" />
+                <ScalarProperty Name="identityCardNumber" ColumnName="identityCardNumber" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="houseNumber" ColumnName="houseNumber" />
+                <ScalarProperty Name="apartmentNumber" ColumnName="apartmentNumber" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="DataAccess.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="icePhoneNumber" ColumnName="icePhoneNumber" />
+                <ScalarProperty Name="personalIdentityNumber" ColumnName="personalIdentityNumber" />
+                <ScalarProperty Name="identityCardNumber" ColumnName="identityCardNumber" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="houseNumber" ColumnName="houseNumber" />
+                <ScalarProperty Name="apartmentNumber" ColumnName="apartmentNumber" />
+                <ScalarProperty Name="positionID" ColumnName="positionID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="supervisorID" ColumnName="supervisorID" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="DataAccess.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="DataAccess.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="serviceTypeID" ColumnName="serviceTypeID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceDate">
+            <EntityTypeMapping TypeName="DataAccess.ServiceDate">
+              <MappingFragment StoreEntitySet="ServiceDate">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceType">
+            <EntityTypeMapping TypeName="DataAccess.ServiceType">
+              <MappingFragment StoreEntitySet="ServiceType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sportTypeID" ColumnName="sportTypeID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="durationInMinutes" ColumnName="durationInMinutes" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="isCourse" ColumnName="isCourse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SportType">
+            <EntityTypeMapping TypeName="DataAccess.SportType">
+              <MappingFragment StoreEntitySet="SportType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EmployeeToSportType" TypeName="DataAccess.EmployeeToSportType"
+                                 StoreEntitySet="EmployeeToSportType">
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="id" ColumnName="employeeID" />
+            </EndProperty>
+            <EndProperty Name="SportType">
+              <ScalarProperty Name="id" ColumnName="sportTypeID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ServiceToCustomer" TypeName="DataAccess.ServiceToCustomer"
+                                 StoreEntitySet="ServiceToCustomer">
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="id" ColumnName="customerID" />
+            </EndProperty>
+            <EndProperty Name="Service">
+              <ScalarProperty Name="id" ColumnName="serviceID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

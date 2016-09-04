@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="DesktopClientGui.Position.PositionHome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:positionViewModel="clr-namespace:DesktopClientLogic.ViewModels.PositionViewModel;assembly=DesktopClientLogic"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <positionViewModel:PositionHomeViewModel />
+    </UserControl.DataContext>
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="Loaded">
+            <intr:InvokeCommandAction Command="{Binding OnPageLoadCommand}" />
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
+    <Grid Style="{StaticResource ContentRoot}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Text="Przeglądaj stanowiska" Style="{DynamicResource Heading2}"
+                       Margin="0,0,0,8" />
+            <TextBlock DockPanel.Dock="Top" Height="Auto" Text="{Binding ErrorText, Mode=TwoWay}" Foreground="Red"
+                       Margin="0,0,0,8">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <DataGrid SelectedItem="{Binding SelectedPosition}" ItemsSource="{Binding Positions}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True" CanUserReorderColumns="True" CanUserResizeColumns="True"
+                      CanUserResizeRows="true" CanUserSortColumns="true">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Command="{Binding DataContext.EditPositionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                    Height="20" Width="20" Padding="0" Margin="0" Background="Transparent"
+                                    BorderThickness="0">
+                                    <StackPanel>
+                                        <Image Source="..\Image\record.edit.dark.png" Height="18" Width="18" Margin="0" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Command="{Binding DataContext.RemovePositionCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                    Height="20" Width="20" Padding="0" Margin="0" Background="Transparent"
+                                    BorderThickness="0">
+                                    <StackPanel>
+                                        <Image Source="..\Image\record.delete.dark.png" Height="18" Width="18"
+                                               Margin="0" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <mui:DataGridTextColumn Header="ID" Binding="{Binding Id}" Visibility="Hidden" />
+                    <mui:DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" />
+                    <mui:DataGridTextColumn Header="Opis" Binding="{Binding Description}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</UserControl>

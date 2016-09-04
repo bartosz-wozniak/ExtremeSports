@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{E48D8B71-7F20-4E0E-B68A-36E0FE4370B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuisnessLogic", "BuisnessLogic\BuisnessLogic.csproj", "{1A3DF863-F3AB-45C3-9E82-48B3BD6F9DE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClientGui", "DesktopClientGui\DesktopClientGui.csproj", "{DF17E932-03BF-4C19-BF12-A60F30466B01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{2D927C41-C93D-4E9C-83D2-44443646F3E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{C3BCFC37-F946-4BF0-9C58-8F7089A68EDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopClientLogic", "DesktopClientLogic\DesktopClientLogic.csproj", "{52D5FCC6-2EAE-44CB-A2C9-FBC4ED7FF1CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2433B9AF-9E11-4A4A-A41F-B9E75ECBFC6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{EA9E32E4-B601-4BEF-8FB8-08B016CCA8C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E48D8B71-7F20-4E0E-B68A-36E0FE4370B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E48D8B71-7F20-4E0E-B68A-36E0FE4370B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E48D8B71-7F20-4E0E-B68A-36E0FE4370B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E48D8B71-7F20-4E0E-B68A-36E0FE4370B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3DF863-F3AB-45C3-9E82-48B3BD6F9DE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3DF863-F3AB-45C3-9E82-48B3BD6F9DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3DF863-F3AB-45C3-9E82-48B3BD6F9DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3DF863-F3AB-45C3-9E82-48B3BD6F9DE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF17E932-03BF-4C19-BF12-A60F30466B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF17E932-03BF-4C19-BF12-A60F30466B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF17E932-03BF-4C19-BF12-A60F30466B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF17E932-03BF-4C19-BF12-A60F30466B01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D927C41-C93D-4E9C-83D2-44443646F3E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D927C41-C93D-4E9C-83D2-44443646F3E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D927C41-C93D-4E9C-83D2-44443646F3E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D927C41-C93D-4E9C-83D2-44443646F3E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3BCFC37-F946-4BF0-9C58-8F7089A68EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3BCFC37-F946-4BF0-9C58-8F7089A68EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3BCFC37-F946-4BF0-9C58-8F7089A68EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3BCFC37-F946-4BF0-9C58-8F7089A68EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52D5FCC6-2EAE-44CB-A2C9-FBC4ED7FF1CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D5FCC6-2EAE-44CB-A2C9-FBC4ED7FF1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D5FCC6-2EAE-44CB-A2C9-FBC4ED7FF1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D5FCC6-2EAE-44CB-A2C9-FBC4ED7FF1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2433B9AF-9E11-4A4A-A41F-B9E75ECBFC6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2433B9AF-9E11-4A4A-A41F-B9E75ECBFC6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2433B9AF-9E11-4A4A-A41F-B9E75ECBFC6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2433B9AF-9E11-4A4A-A41F-B9E75ECBFC6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9E32E4-B601-4BEF-8FB8-08B016CCA8C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9E32E4-B601-4BEF-8FB8-08B016CCA8C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9E32E4-B601-4BEF-8FB8-08B016CCA8C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9E32E4-B601-4BEF-8FB8-08B016CCA8C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://bartosz-wozniak.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DataAccess\\DataAccess.csproj
+		SccProjectName1 = DataAccess
+		SccLocalPath1 = DataAccess
+		SccProjectUniqueName2 = BuisnessLogic\\BuisnessLogic.csproj
+		SccProjectName2 = BuisnessLogic
+		SccLocalPath2 = BuisnessLogic
+		SccProjectUniqueName3 = Shared\\Shared.csproj
+		SccProjectName3 = Shared
+		SccLocalPath3 = Shared
+		SccProjectUniqueName4 = WebApi\\WebApi.csproj
+		SccProjectName4 = WebApi
+		SccLocalPath4 = WebApi
+		SccProjectUniqueName5 = DesktopClientGui\\DesktopClientGui.csproj
+		SccProjectName5 = DesktopClientGui
+		SccLocalPath5 = DesktopClientGui
+		SccProjectUniqueName6 = DesktopClientLogic\\DesktopClientLogic.csproj
+		SccProjectName6 = DesktopClientLogic
+		SccLocalPath6 = DesktopClientLogic
+		SccProjectUniqueName7 = UnitTests\\UnitTests.csproj
+		SccProjectName7 = UnitTests
+		SccLocalPath7 = UnitTests
+		SccProjectUniqueName8 = WebClient\\WebClient.csproj
+		SccProjectName8 = WebClient
+		SccLocalPath8 = WebClient
+	EndGlobalSection
+EndGlobal

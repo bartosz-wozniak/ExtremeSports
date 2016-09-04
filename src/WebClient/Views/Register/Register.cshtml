@@ -1,0 +1,143 @@
+﻿@using WebClient.Models
+@model RegisterViewModel
+@{
+    ViewBag.Title = "Rejestracja";
+}
+
+@if (Request.IsAuthenticated == false)
+{
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+    using (Html.BeginForm("Register", "Register", FormMethod.Post))
+    {
+        <section class="form-field" style="text-align: center">
+            <table>
+                <tr>
+                    <td>
+                        <label for="email">Imię: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Nazwisko: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Surname)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">E-Mail: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Telefon: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.PhoneNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Telefon Ratunkowy: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.IcePhoneNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Pesel: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.PersonalIdentityNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Numer Dowodu: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.IdentityCardNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Miasto: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.City)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Ulica: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Street)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Kod Pocztowy: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.PostalCode)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Numer Domu: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.HouseNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Numer Mieszkania: </label>
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.ApartmentNumber)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Hasło: </label>
+                    </td>
+                    <td>
+                        @Html.PasswordFor(model => model.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Zarejestruj się" class="submit btn blue-btn special-submit" />
+                    </td>
+                </tr>
+            </table>
+        </section>
+        if (Model != null)
+        {
+            <div>@Model.ErrorText   </div>
+        }
+    }
+}
+else
+{
+    <div> Jesteś już zalogowany.</div>
+}
+
+
+
+
+
+
+
+

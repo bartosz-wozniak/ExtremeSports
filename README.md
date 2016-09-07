@@ -18,11 +18,11 @@ This application offers all functionalities necessary for managing such a compan
 More information can be found in documentation folder.
 Website is deployed to Azure: https://extremesports.azurewebsites.net/
 
-Purpose
+## Purpose
 
 This project was developed during one of my courses at the University. It was group project developed together with my collegue.
 Designing this application let me learn more about client-server communication, Web Api and ASP.NET.
 
-Licence
+## Licence
 
 This project is under the MIT License.
